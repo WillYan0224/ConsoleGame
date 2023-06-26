@@ -53,5 +53,3 @@ void SetMode(int no);
 int GetMode(void);
 
 
-
-

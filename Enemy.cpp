@@ -64,7 +64,7 @@ void UpdateEnemy(void) {
 
 	
 	for (int i = 0; i < ENEMY_MAX; i++){
-		int rng = rand() % 8;
+		int rng = rand() % 20;
 		switch(rng)
 		{
 		case 0:

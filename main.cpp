@@ -93,7 +93,9 @@ void Init(void) {
 	printf("ゲーム開始！\n");
 	printf("←↑→↓で移動します\n");
 	// printf("WASDで移動します\n");
-
+	// キー入力待ち
+	rewind(stdin);
+	(void)_getch();
 }
 
 // 終了処理
@@ -135,6 +137,10 @@ void Draw(void) {
 		// フィールドの表示処理
 		DrawField();
 		break;
+	case GAME_BATTLE:
+		// TODO: BATTLE PLAYER VS MONSTER 1:1
+
+
 	default:
 		printf("[Error]: Mode out of range: %d\n", mode);
 	}

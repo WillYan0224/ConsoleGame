@@ -23,7 +23,6 @@
 * 構造体定義
 *******************************************************************************/
 
-
 /*******************************************************************************
 * プロトタイプ宣言
 *******************************************************************************/
@@ -44,6 +43,13 @@ PLAYER player[PLAYER_MAX];
 void InitPlayer(void) {
 	player[0].x = 1;
 	player[0].y = 1;
+	player[0].HP = 30;
+
+	printf("旅人よ、お名前は？←　");
+	scanf("%s", player[0].name);
+	Sleep(1500);
+
+	player[0].log = ERROR_NO;
 }
 // プレイヤーの終了処理
 void UninitPlayer(void) {
@@ -94,22 +100,33 @@ void UpdatePlayer(void) {
 
 	// 移動後の場所をチェックする
 	switch (getFieldData(player->y, player->x)) {
-	case 0:
-		break;
-	case 1:
-		player[0].y = opy;
-		player[0].x = opx;
-		break;
-	case 2:
-		entity->X++;
-		setFieldData(player->y, player->x, 0);
-		break;
-	case 3:
-		entity->key++;
-		setFieldData(player->y, player->x, 0);
-	default:
-		printf("$");
-		break;
+		case 0:
+			break;
+		case 1:
+			player->y = opy;
+			player->x = opx;
+			break;
+		case 2:
+			entity->X++;
+			setFieldData(player->y, player->x, 0);
+			break;
+		case 3:
+			entity->key++;
+			setFieldData(player->y, player->x, 0);
+		case 4:
+			if (entity->key <= 0) {
+				player->log = ERROR_KEY;
+				player->y = opy;
+				player->x = opx;
+			}
+			else{
+				entity->key--;
+				setFieldData(player->y, player->x, 0);
+			}
+			break;
+		default:
+			printf("$");
+			break;
 	}
 }
 // プレイヤーの描画処理
