@@ -42,8 +42,8 @@ PLAYER player[PLAYER_MAX];
 
 // プレイヤーの初期化
 void InitPlayer(void) {
-	player[0].x = 5;
-	player[0].y = 5;
+	player[0].x = 1;
+	player[0].y = 1;
 }
 // プレイヤーの終了処理
 void UninitPlayer(void) {
@@ -51,6 +51,7 @@ void UninitPlayer(void) {
 }
 // プレイヤーの更新処理
 void UpdatePlayer(void) {
+	ENTITY* entity = getLigth();
 
 	if (_kbhit() == 0) {
 		system("cls");
@@ -99,6 +100,13 @@ void UpdatePlayer(void) {
 		player[0].y = opy;
 		player[0].x = opx;
 		break;
+	case 2:
+		entity->X++;
+		setFieldData(player->y, player->x, 0);
+		break;
+	case 3:
+		entity->key++;
+		setFieldData(player->y, player->x, 0);
 	default:
 		printf("$");
 		break;

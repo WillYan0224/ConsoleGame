@@ -45,12 +45,6 @@ ENEMY enemy[ENEMY_MAX];
 void InitEnemy(void) {
 	enemy[0].x = 8;
 	enemy[0].y = 8;
-
-	enemy[1].x = 15;
-	enemy[1].y = 10;
-
-	enemy[2].x = 12;
-	enemy[2].y = 9;
 }
 // エネミーの終了処理
 void UninitEnemy(void) {
@@ -60,36 +54,40 @@ void UninitEnemy(void) {
 void UpdateEnemy(void) {
 	// 現在の座標を保存しておく エネミー.ver
 
+
 	PLAYER* player = getPlayer();
 
-	int rng = rand() % 3;
+	enemy[0].ox = enemy[0].x;
+	enemy[0].oy = enemy[0].y;
 
-	for (int i = 0; i < ENEMY_MAX; i++) {
-		enemy[i].ox = enemy[i].x;
-		enemy[i].oy = enemy[i].y;
-		if (rng == 0) {
-			if (enemy[i].x - player->x >= 0) {
-				enemy[i].x--;
-			}
-			else if (enemy[0].x - player->x < 0) {
-				enemy[i].x++;
-			}
-		}
-		else if (rng == 1) {
-			if (enemy[i].y - player->y >= 0) {
-				enemy[i].y--;
-			}
-			else {
-				enemy[i].y++;
-			}
-		}
-		else {
+	
+
+	
+	for (int i = 0; i < ENEMY_MAX; i++){
+		int rng = rand() % 8;
+		switch(rng)
+		{
+		case 0:
+			enemy[i].x--;
+			break;
+		case 1:
+			enemy[i].x++;
+			break;
+		case 2:
+			enemy[i].y--;
+			break;
+		case 3:
 			enemy[i].y++;
+			break;
+		default:
+			break;
 		}
+		
 	}
+	
 	// 移動後の場所をチェックする　エネミー.ver
 	for (int i = 0; i < ENEMY_MAX; i++) {
-		switch (getFieldData(enemy->y, enemy->x)) {
+		switch (getFieldData( (enemy + i)->y, (enemy + i)->x)) {
 		case 0:
 			break;
 		case 1:
