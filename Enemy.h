@@ -26,7 +26,7 @@
 struct ENEMY {
 	int x;
 	int y;
-
+	int HP;
 	int ox;
 	int oy;
 };

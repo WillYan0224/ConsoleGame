@@ -44,9 +44,10 @@ void InitPlayer(void) {
 	player[0].x = 1;
 	player[0].y = 1;
 	player[0].HP = 30;
+	player[0].str = 30;
 
 	printf("旅人よ、お名前は？←　");
-	scanf("%s", player[0].name);
+	(void)scanf("%s", player[0].name);
 	Sleep(1500);
 
 	player[0].log = ERROR_NO;

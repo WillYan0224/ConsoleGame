@@ -29,11 +29,13 @@ enum
 
 
 struct PLAYER {
+	char name[128];
 	int x;
 	int y;
 
 	int HP;
-	char name[128];
+	int str;
+
 
 	int log;
 };

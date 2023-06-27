@@ -45,6 +45,7 @@ ENEMY enemy[ENEMY_MAX];
 void InitEnemy(void) {
 	enemy[0].x = 8;
 	enemy[0].y = 8;
+	enemy[0].HP = 100;
 }
 // エネミーの終了処理
 void UninitEnemy(void) {
