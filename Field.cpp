@@ -35,7 +35,6 @@
 *******************************************************************************/
 ENTITY entity;
 
-
 // 2Dフィールド　20ⅹ20
 int field[HEIGHT][WIDTH] =
 { 
@@ -76,6 +75,9 @@ void InitField(void) {
 	entity.Y = 0; // 縦軸
 
 	entity.key = 0;
+
+
+
 	// プレイヤーの初期化
 	InitPlayer();
 
@@ -140,7 +142,7 @@ void DrawField(void) {
 		printf("\n"); // 次の行へ改行する
 	}
 
-	printf("\n\n　#: 壁	\n　T: ライド\n　K: 鍵\n　D: 鍵がかかった扉\n　O: 不安定な魔法陣\n\n\tKey:\t %d\n\t%s\tHP: %d",entity.key,player[0].name, player[0].HP);
+	printf("\n　#:　壁	T: ライド\n　K:　鍵\tD: 鍵がかかった扉\n\n　Key:\t %d\n　%s\tHP: %d",entity.key,player[0].name, player[0].HP);
 
 	switch(player[0].log)
 	{
