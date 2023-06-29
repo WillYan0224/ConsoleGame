@@ -57,7 +57,7 @@ void UninitPlayer(void) {
 }
 // プレイヤーの更新処理
 void UpdatePlayer(void) {
-	ENTITY* entity = getLigth();
+	ENTITY* entity = getEntity();
 
 	if (_kbhit() == 0) {
 		system("cls");
@@ -113,6 +113,7 @@ void UpdatePlayer(void) {
 		case 3:
 			entity->key++;
 			setFieldData(player->y, player->x, 0);
+			break;
 		case 4:
 			if (entity->key <= 0) {
 				player->log = ERROR_KEY;
@@ -123,6 +124,11 @@ void UpdatePlayer(void) {
 				entity->key--;
 				setFieldData(player->y, player->x, 0);
 			}
+			break;
+		case 5:
+			player->log = RHYTHM_LOG;
+			setFieldData(player->y, player->x, 0);
+			SetMode(GAME_RHYTHM);
 			break;
 		default:
 			printf("$");

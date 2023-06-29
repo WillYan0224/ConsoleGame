@@ -20,9 +20,9 @@
 
 // プレイヤーの表示範囲
 #define lPOV 5 //　左
-#define rPOV 25 //　右 
-#define uPOV 6 //　上
-#define dPOV 6 //　下
+#define rPOV 5 //　右 
+#define uPOV 4 //　上
+#define dPOV 4 //　下
 
 /*******************************************************************************
 * 構造体定義
@@ -48,7 +48,7 @@ void DrawField(void);
 int getFieldData(int y, int x);
 void setFieldData(int y, int x, int num);
 
-ENTITY* getLigth();
+ENTITY* getEntity();
 
 
 

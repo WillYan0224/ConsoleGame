@@ -121,6 +121,11 @@ void Update(void) {
 		// フィールドの更新処理
 		UpdateField();
 		break;
+	case GAME_BATTLE:
+		// バトルの更新処理
+		break;
+	case GAME_RHYTHM:
+		break;
 	default:
 		printf("[Error]: Mode out of range: %d\n", mode);
 	}
@@ -137,9 +142,14 @@ void Draw(void) {
 		// フィールドの表示処理
 		DrawField();
 		break;
+		//　バトルの表示処理
 	case GAME_BATTLE:
 		// TODO: BATTLE PLAYER VS MONSTER 1:1
-
+		break;
+		//　音ゲーの更新処理
+	case GAME_RHYTHM:
+		
+		break;
 
 	default:
 		printf("[Error]: Mode out of range: %d\n", mode);

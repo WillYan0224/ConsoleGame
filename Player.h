@@ -25,6 +25,10 @@ enum
 	ERROR_NO,
 	ERROR_KEY,
 	ERROR_TELEPORT,
+
+
+	RHYTHM_LOG,
+	MAX_LOG,
 };
 
 
