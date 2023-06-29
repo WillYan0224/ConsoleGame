@@ -1,5 +1,5 @@
 /*******************************************************************************
-* タイトル:		フィールドプログラム
+* タイトル:		横スクロールフィールドプログラム
 * プログラム名:	Field.cpp
 * 作成者:		GP11A132 17 鍾政殷
 * 作成日:		2023/06/19
@@ -10,9 +10,10 @@
 /*******************************************************************************
 * インクルードファイル
 *******************************************************************************/
-#include "Field.h"
+
 #include "Player.h"
 #include "Enemy.h"
+#include "ScrollBG.h"
 #include "main.h"
 
 /*******************************************************************************
@@ -33,11 +34,11 @@
 /*******************************************************************************
 * グローバル変数
 *******************************************************************************/
-ENTITY entity;
+
 
 
 // 2Dフィールド　20ⅹ20
-int field[m_HEIGHT][m_WIDTH] =
+int scrollBG[bg_HEIGHT][bg_WIDTH] =
 { 
   1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,  
   1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,  
@@ -71,110 +72,35 @@ int field[m_HEIGHT][m_WIDTH] =
 *******************************************************************************/
 
 // フィールドの初期化処理
-void InitField(void) {
-	entity.X = 0; // 横軸
-	entity.Y = 0; // 縦軸
+void InitScrollBG(void) {
 
-	entity.key = 0;
-	// プレイヤーの初期化
-	InitPlayer();
 
-	// エネミーの初期化
-	InitEnemy();
 	
 }
 
 // フィールドの終了処理
-void UninitField(void) {
+void UninitScrollBG(void) {
 	UninitPlayer();
 	UninitEnemy();
 }
 
 // フィールド表示処理
-void DrawField(void) {
+void DrawScrollBG(void) {
 	PLAYER* player = getPlayer();
 	ENEMY* enemy = getEnemy();
 
-	// TODO: PVE Collision & Change State... FIELD -> BATTLE
-
-	for (int y = player->y - m_uPOV; y < player->y + m_dPOV + entity.Y; y++) {
-		// 1行表示
-		for (int x = player->x - m_lPOV; x < player->x + m_rPOV + entity.X; x++) {
-			if (y < 0 || y >= m_HEIGHT || x < 0 || x >= m_WIDTH) {
-				printf("X");
-			}
-			// Y行目のX列目がプレイヤーの座標と一致したら
-			else if (x == player->x && y == player->y) {
-				// Pを表示
-				DrawPlayer();
-				
-			}
-			else if ((x == enemy->x && y == enemy->y))
-			{
-				DrawEnemy();
-			}
-			else {
-				// 配列の中身にしたがって表示する
-				switch (field[y][x]) {
-				case 0: // 通れる
-					printf(" ");
-					break;
-				case 1: // 障害物
-					printf("#");
-					break;
-				case 2: // ライド
-					printf("T");
-					break;
-				case 3: // キー
-					printf("K");
-					break;
-				case 4: // ドア
-					printf("D");
-					break;
-				case 5: // ゴール
-					printf("G");
-					break;
-				default: // エラー検知
-					printf("$");
-					break;
-				}
-			}
-		}
-		printf("\n"); // 次の行へ改行する
-	}
-
-	printf("\n\n　#: 壁	\n　T: ライド\n　K: 鍵\n　D: 鍵がかかった扉\n\n\n\tKey:\t %d\n\t%s\tHP: %d",entity.key, player[0].name, player[0].HP);
-
-	switch(player[0].log)
-	{
-		case ERROR_NO:
-			break;
-		case ERROR_KEY:
-			printf("\n鍵が掛かっている、どこに鍵があるはず、、、\n");
-			Sleep(1000);
-			player[0].log = ERROR_NO;
-			break;
-		case RHYTHM_LOG:
-			printf("\n階段があるようだ、入ってみよう\n");
-			Sleep(1000);
-	}
-	
-	Sleep(100);
 }
 
 // 指定されたXY座標を返す
-int getFieldData(int y, int x) {
-	return field[y][x];
+int getScrollBGData(int y, int x) {
+	return scrollBG[y][x];
 }
-void setFieldData(int y, int x, int num)
+void setScrollBGData(int y, int x, int num)
 {
-	field[y][x] = num;
+	scrollBG[y][x] = num;
 }
 
 
-ENTITY* getEntity()
-{
-	return &entity;
-}
+
 
 
