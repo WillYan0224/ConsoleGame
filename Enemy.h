@@ -49,4 +49,4 @@ void UninitEnemy(void);
 void UpdateEnemy(void);
 void DrawEnemy(void);
 
-ENEMY* getEnemy(void);
+ENEMY* GetEnemy(void);

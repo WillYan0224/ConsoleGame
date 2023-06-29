@@ -92,8 +92,8 @@ void UninitField(void) {
 
 // フィールド表示処理
 void DrawField(void) {
-	PLAYER* player = getPlayer();
-	ENEMY* enemy = getEnemy();
+	PLAYER* player = GetPlayer();
+	ENEMY* enemy = GetEnemy();
 
 	// TODO: PVE Collision & Change State... FIELD -> BATTLE
 
@@ -145,34 +145,32 @@ void DrawField(void) {
 
 	printf("\n\n　#: 壁	\n　T: ライド\n　K: 鍵\n　D: 鍵がかかった扉\n\n\n\tKey:\t %d\n\t%s\tHP: %d",entity.key, player[0].name, player[0].HP);
 
-	switch(player[0].log)
+	switch(player[0].status)
 	{
 		case ERROR_NO:
 			break;
 		case ERROR_KEY:
 			printf("\n鍵が掛かっている、どこに鍵があるはず、、、\n");
 			Sleep(1000);
-			player[0].log = ERROR_NO;
+			player[0].status = ERROR_NO;
 			break;
-		case RHYTHM_LOG:
-			printf("\n階段があるようだ、入ってみよう\n");
-			Sleep(1000);
+		
 	}
 	
 	Sleep(100);
 }
 
 // 指定されたXY座標を返す
-int getFieldData(int y, int x) {
+int GetFieldData(int y, int x) {
 	return field[y][x];
 }
-void setFieldData(int y, int x, int num)
+void SetFieldData(int y, int x, int num)
 {
 	field[y][x] = num;
 }
 
 
-ENTITY* getEntity()
+ENTITY* GetEntity()
 {
 	return &entity;
 }

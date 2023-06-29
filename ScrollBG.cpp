@@ -86,16 +86,16 @@ void UninitScrollBG(void) {
 
 // フィールド表示処理
 void DrawScrollBG(void) {
-	PLAYER* player = getPlayer();
-	ENEMY* enemy = getEnemy();
+	PLAYER* player = GetPlayer();
+	ENEMY* enemy = GetEnemy();
 
 }
 
 // 指定されたXY座標を返す
-int getScrollBGData(int y, int x) {
+int GetScrollBGData(int y, int x) {
 	return scrollBG[y][x];
 }
-void setScrollBGData(int y, int x, int num)
+void SetScrollBGData(int y, int x, int num)
 {
 	scrollBG[y][x] = num;
 }

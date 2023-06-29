@@ -46,10 +46,10 @@ void UninitField(void);
 void UpdateField(void);
 void DrawField(void);
 
-int getFieldData(int y, int x);
-void setFieldData(int y, int x, int num);
+int GetFieldData(int y, int x);
+void SetFieldData(int y, int x, int num);
 
-ENTITY* getEntity();
+ENTITY* GetEntity();
 
 
 

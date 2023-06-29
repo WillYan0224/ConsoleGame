@@ -39,8 +39,8 @@ void UninitScrollBG(void);
 void UpdateScrollBG(void);
 void DrawScrollBG (void);
 
-int getScrollBGData(int y, int x);
-void setScrollBGData(int y, int x, int num);
+int GetScrollBGData(int y, int x);
+void GetScrollBGData(int y, int x, int num);
 
 
 

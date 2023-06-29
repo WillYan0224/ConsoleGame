@@ -22,15 +22,16 @@
 *******************************************************************************/
 enum
 {
+	PLAYER_NAMED = 50,
 	ERROR_NO,
 	ERROR_KEY,
-	ERROR_TELEPORT,
-
-
-	RHYTHM_LOG,
 	MAX_LOG,
 };
 
+enum 
+{
+	PLAYER_FIRSTLETTER = 100,
+};
 
 struct PLAYER {
 	char name[128];
@@ -40,8 +41,7 @@ struct PLAYER {
 	int HP;
 	int str;
 
-
-	int log;
+	int status;
 };
 
 /*******************************************************************************
@@ -53,7 +53,7 @@ void UninitPlayer(void);
 void UpdatePlayer(void);
 void DrawPlayer(void);
 
-PLAYER* getPlayer(void);
+PLAYER* GetPlayer(void);
 
 
 

@@ -40,9 +40,9 @@ void UninitBlock(void);
 void UpdateBlock(void);
 void DrawBlock(void);
 
-BLOCK* getBlock(void);
+BLOCK* GetBlock(void);
 
-void setBlock(void);
+void SetBlock(void);
 
 
 

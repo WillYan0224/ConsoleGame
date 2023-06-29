@@ -66,10 +66,10 @@ void DrawBlock(void) {
 }
 
 // w’è‚³‚ê‚½XYÀ•W‚ğ•Ô‚·
-int getBlock(int y, int x) {
+int GetBlock(int y, int x) {
 	return 0;
 }
-void setBlock(int y, int x, int num)
+void SetBlock(int y, int x, int num)
 {
 	
 }

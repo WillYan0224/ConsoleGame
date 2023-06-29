@@ -56,7 +56,7 @@ void UpdateEnemy(void) {
 	// 現在の座標を保存しておく エネミー.ver
 
 
-	PLAYER* player = getPlayer();
+	PLAYER* player = GetPlayer();
 
 	enemy[0].ox = enemy[0].x;
 	enemy[0].oy = enemy[0].y;
@@ -88,7 +88,7 @@ void UpdateEnemy(void) {
 	
 	// 移動後の場所をチェックする　エネミー.ver
 	for (int i = 0; i < ENEMY_MAX; i++) {
-		switch (getFieldData( (enemy + i)->y, (enemy + i)->x)) {
+		switch (GetFieldData( (enemy + i)->y, (enemy + i)->x)) {
 		case 0:
 			break;
 		case 1:
@@ -106,7 +106,7 @@ void DrawEnemy(void) {
 	printf("M");
 }
 
-ENEMY* getEnemy(void) {
+ENEMY* GetEnemy(void) {
 	return enemy;
 }
 
