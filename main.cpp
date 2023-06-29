@@ -45,7 +45,7 @@ int mode = 0; // 0: Title 1: Field 2:
 
 int main(void)
 {
-/*
+/*	
 	***************************************
 	*　　　初期設定                          *
 	*　　　Game Loop                       *
