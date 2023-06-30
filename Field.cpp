@@ -90,12 +90,37 @@ void UninitField(void) {
 	UninitEnemy();
 }
 
+void UpdateField(void)
+{
+	// プレイヤーの座標更新処理
+	UpdatePlayer();
+	// エネミーの座標更新処理
+	UpdateEnemy();
+
+	{	// 当たり判定
+		PLAYER* player = GetPlayer();
+		
+		if (1)
+		{	// 当たっていたらバトルへＧｏ！
+
+			system("cls");
+			printf("\n\n\n\t\tバトルへＧｏ！\n");
+			Sleep(2000);
+			// キー入力待ち
+			rewind(stdin);
+			(void)_getch();
+			system("cls");
+
+			SetMode(GAME_BATTLE);	// バトルモードへ遷移する
+		}
+
+	}
+}
+
 // フィールド表示処理
 void DrawField(void) {
 	PLAYER* player = GetPlayer();
 	ENEMY* enemy = GetEnemy();
-
-	// TODO: PVE Collision & Change State... FIELD -> BATTLE
 
 	for (int y = player->y - m_uPOV; y < player->y + m_dPOV + entity.Y; y++) {
 		// 1行表示
