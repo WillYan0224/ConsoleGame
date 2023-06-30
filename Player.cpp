@@ -74,8 +74,8 @@ void UninitPlayer(void) {
 }
 // プレイヤーの更新処理
 void UpdatePlayer(void) {
-	ENTITY* entity = GetEntity();
-	CAMERA* camera = GetCamera();
+	
+	
 
 	if (_kbhit() == 0) {
 		system("cls");
@@ -103,6 +103,7 @@ void UpdatePlayer(void) {
 	// 移動後の場所をチェックする
 	if(GetMode() == GAME_FIELD)
 	{
+		ENTITY* entity = GetEntity();
 		switch (key) {
 		case 'w':
 		case 0x48:
@@ -155,11 +156,12 @@ void UpdatePlayer(void) {
 
 	if(GetMode() == GAME_TITLE)
 	{
+		CAMERA* camera = GetCamera();
 		switch (key) {
 		case 'd':
 		case 0x4d:
 			player[0].x++;
-			player[0].y++;
+
 			break;
 		}
 		switch (GetTitleData(player->y, player->x)) {
@@ -168,17 +170,28 @@ void UpdatePlayer(void) {
 				break;
 			case 1:
 				player->y = opy;
-				camera->X++;
+				
 				break;
 			case 2:
 				break;
 			case 3:
 				break;
 			case 4:
-				
+				camera->X++;
 				SetTitleData(player->y, player->x, 0);
 				break;
 			case 5:
+				break;
+			case 7:
+				if(key == 'd')
+				{
+					player->x = opx;
+					player->y += 1;
+				}
+				break;
+			case 8:
+				Sleep(1000);
+				SetMode(GAME_FIELD);
 				break;
 			default:
 				printf("$");
