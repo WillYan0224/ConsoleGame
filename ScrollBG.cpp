@@ -16,6 +16,7 @@
 #include "ScrollBG.h"
 #include "Block.h"
 #include "main.h"
+#include "Title.h"
 
 /*******************************************************************************
 * マクロ定義
@@ -63,7 +64,12 @@ int scrollBG[bg_HEIGHT][bg_WIDTH] =
 // フィールドの初期化処理
 void InitScrollBG(void) {
 	light.X = 6;
-	light.Y = 4;
+
+	// プレイヤーの初期化 
+	InitPlayer();
+
+	// エネミーの初期化
+	InitEnemy();
 }
 
 void UpdateScrollBG(void) {
@@ -84,52 +90,55 @@ void UpdateScrollBG(void) {
 void DrawScrollBG(void) {
 	PLAYER* player = GetPlayer();
 	ENEMY* enemy = GetEnemy();
-
-	for (int y = player->y - bg_uPOV - light.Y; y < player->y + bg_dPOV; y++) {
-		// 1行表示
-		for (int x = player->x - bg_lPOV - light.X; x < player->x + bg_rPOV + light.X; x++) {
-
-			// Y行目のX列目がプレイヤーの座標と一致したら
-			if (x == player->x && y == player->y) {
-				// Pを表示
-				DrawPlayer();
-
-			}
-			else if ((x == enemy->x && y == enemy->y))
-			{
-				DrawEnemy();
-			}
-			else {
-				// 配列の中身にしたがって表示する
-				switch (scrollBG[y][x]) {
-				case 0: // 通れる
+		printf("\n     ");
+		for (int y = player->y - bg_uPOV; y < player->y + bg_dPOV; y++) {
+			// 1行表示
+			for (int x = player->x - bg_lPOV; x < player->x + bg_rPOV + light.X; x++) {
+				if (y < 0 || y >= bg_HEIGHT || x < 0 || x >= bg_WIDTH) {
 					printf(" ");
-					break;
-				case 1: // 障害物
-					printf("#");
-					break;
-				case 2: // ライド
-					printf("T");
-					break;
-				case 3: // キー
-					printf("K");
-					break;
-				case 4: // ドア
-					printf("D");
-					break;
-				case 5: // ゴール
-					printf("G");
-					break;
-				default: // エラー検知
-					printf("$");
-					break;
+				}
+				// Y行目のX列目がプレイヤーの座標と一致したら
+				else if (x == player->x && y == player->y) {
+					// Pを表示
+					DrawPlayer();
+
+				}
+				else if ((x == enemy->x && y == enemy->y))
+				{
+					DrawEnemy();
+				}
+				else {
+					// 配列の中身にしたがって表示する
+					switch (scrollBG[y][x]) {
+					case 0: // 通れる
+						printf(" ");
+						break;
+					case 1: // 障害物
+						printf("#");
+						break;
+					case 2: // ライド
+						printf("T");
+						break;
+					case 3: // キー
+						printf("K");
+						break;
+					case 4: // ドア
+						printf("D");
+						break;
+					case 5: // ゴール
+						printf("G");
+						break;
+					default: // エラー検知
+						printf("$");
+						break;
+					}
 				}
 			}
+			printf("\n     ");
 		}
-		printf("\n"); // 次の行へ改行する
+		Sleep(100);
 	}
-	Sleep(200);
-}
+
 
 void UninitScrollBG(void) {
 	UninitPlayer();
@@ -145,6 +154,10 @@ void SetScrollBGData(int y, int x, int num)
 	scrollBG[y][x] = num;
 }
 
+LIGHT* GetLight()
+{
+	return &light;
+}
 
 
 

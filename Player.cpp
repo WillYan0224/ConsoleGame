@@ -161,10 +161,11 @@ void UpdatePlayer(void) {
 	// TITLEˆ—
 	if(GetMode() == GAME_SCROLL)
 	{
-		CAMERA* camera = GetCamera();
+		LIGHT* light = GetLight();
 		switch (key) {
 		case 'w':
 		case 0x48:
+			player[0].x = opx;
 			player[0].y--;
 			break;
 		case 'a':
@@ -175,10 +176,14 @@ void UpdatePlayer(void) {
 		case 0x4d:
 			player[0].x++;
 			break;
+		case 'c':
+			player[0].y--;
+			break;
 		}
 		switch (GetTitleData(player->y, player->x)) {
 			case 0:
-
+				player->x = opx;
+				player->y = player->y++;
 				break;
 			case 1:
 				player->y = opy;
@@ -189,7 +194,6 @@ void UpdatePlayer(void) {
 			case 3:
 				break;
 			case 4:
-				camera->X++;
 				SetTitleData(player->y, player->x, 0);
 				break;
 			case 5:

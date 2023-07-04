@@ -34,7 +34,7 @@
 /*******************************************************************************
 * グローバル変数
 *******************************************************************************/
-
+BLOCK block;
 
 
 
@@ -56,6 +56,10 @@ void InitBlock(void) {
 void UninitBlock(void) {
 
 }
+void UpdateBlock(void)
+{
+	
+}
 
 // フィールド表示処理
 void DrawBlock(void) {
@@ -64,8 +68,8 @@ void DrawBlock(void) {
 }
 
 // 指定されたXY座標を返す
-int GetBlock(int y, int x) {
-	return 0;
+BLOCK* GetBlock(void) {
+	return  &block;
 }
 void SetBlock(int y, int x, int num)
 {
