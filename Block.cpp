@@ -50,9 +50,6 @@ void InitBlock(void) {
 	PLAYER* p = GetPlayer();
 	block[0].x = p->x + 1;
 	block[0].y = p->y - 3;
-	block[0].by = -99;
-	block[0].bx = -99;
-	block[0].dam = 1;
 }
 
 // フィールドの終了処理
@@ -62,7 +59,8 @@ void UninitBlock(void) {
 void UpdateBlock(void)
 {
 	PLAYER* p = GetPlayer();
-	
+	ENEMY* e = GetEnemy();
+
 	if (_kbhit() == 0) {
 		system("cls");
 		return;
@@ -104,10 +102,6 @@ void UpdateBlock(void)
 					block[0].y = p->y;
 					break;
 				}
-		case 'c':
-				block[0].bx = block[0].x + 1; 
-				block[0].by = block[0].y;
-				break;
 		}
 		switch (GetScrollBGData(block[0].y, block[0].x)) {
 		case B: // 建物等通れない
@@ -115,22 +109,14 @@ void UpdateBlock(void)
 			block[0].x = opx;
 			break;
 		}
-		int rng = rand() % 2;
-		for(int i = 0; i < ENEMY_MAX; i++)
-		{
-			
-		}
 	}
-	
 }
 
 // フィールド表示処理
-void DrawBlock(void) {
-	printf("B");
-}
-void DrawBullet(void)
+
+void DrawBlock(void)
 {
-	printf(":");
+	printf("B");
 }
 
 // 指定されたXY座標を返す

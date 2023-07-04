@@ -16,6 +16,8 @@
 #include "Field.h"
 #include "ScrollBG.h"
 #include "Block.h"
+#include "Battle.h"
+
 /*******************************************************************************
 * マクロ定義
 *******************************************************************************/
@@ -34,7 +36,7 @@
 *******************************************************************************/
 
 // シーン遷移用の変数
-int mode = GAME_SCROLL; // 0: Title 1: Field 2:
+int mode = GAME_BATTLE; // 0: Title 1: Field 2:
 
 /*******************************************************************************
  関数名:	int main (void)
@@ -79,8 +81,10 @@ void Init(void) {
 	InitTitle();	//　タイトルの初期化処理
 	InitScrollBG(); //  スクロールフィールドの初期化処理
 	InitField();	//　フィールドの初期化処理
+	InitEnemy();
 	InitPlayer();
 	InitBlock();
+	InitBattle();
 
 
 	// printf("WASDで移動します\n");
@@ -93,6 +97,9 @@ void Uninit(void) {
 	UninitTitle();		//　タイトルの終了処理
 	UninitScrollBG();	//  スクロールフィールドの終了処理
 	UninitField();		//　フィールドの終了処理
+	UninitBattle();
+	UninitEnemy();
+	UninitPlayer();
 
 	// キー入力待ち
 	rewind(stdin);
@@ -116,8 +123,13 @@ void Update(void) {
 		break;
 	case GAME_BATTLE:
 		// バトルの更新処理
+		UpdateBattle();
 		break;
 	case GAME_OVER:
+		SetMode(GAME_TITLE);
+		Init();
+		break;
+	case GAME_CLEAR:
 		SetMode(GAME_TITLE);
 		Init();
 		break;
@@ -142,11 +154,17 @@ void Draw(void) {
 		break;
 		//　バトルの表示処理
 	case GAME_BATTLE:
+		DrawBattle();
 		break;
 		//　音ゲーの更新処理
 	case GAME_OVER:
 		printf("GAMEOVER");
 		Sleep(1000);
+		break;
+	case GAME_CLEAR:
+		printf("　　おめでとう！！ゲームクリア！\n");
+		Sleep(5000);
+		
 		break;
 	default:
 		printf("[Error]: Mode out of range: %d\n", mode);

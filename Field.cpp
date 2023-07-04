@@ -97,11 +97,14 @@ void UpdateField(void)
 	// エネミーの座標更新処理
 	UpdateEnemy();
 
-	{	// 当たり判定
-		PLAYER* player = GetPlayer();
-		
-
+	PLAYER* player = GetPlayer();
+	ENEMY* enemy = GetEnemy();
+	// フィールド上の当たり判定
+	if(player->x == enemy->x && player->y == enemy->y)
+	{
+		SetMode(GAME_BATTLE);
 	}
+
 }
 
 // フィールド表示処理

@@ -49,6 +49,11 @@ struct PLAYER {
 	int status;
 	int isNamed;
 };
+struct PET
+{
+	int HP;
+	int str;
+};
 
 /*******************************************************************************
 * プロトタイプ宣言
@@ -60,6 +65,6 @@ void UpdatePlayer(void);
 void DrawPlayer(void);
 
 PLAYER* GetPlayer(void);
-
+PET* GetPet(void);
 
 

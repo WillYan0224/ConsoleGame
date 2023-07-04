@@ -26,13 +26,6 @@
 struct BLOCK {
 	int x;
 	int y;
-
-
-	int bx;
-	int by;
-	int dam;
-
-	unsigned int count;
 };
 
 /*******************************************************************************
@@ -43,7 +36,7 @@ void InitBlock(void);
 void UninitBlock(void);
 void UpdateBlock(void);
 void DrawBlock(void);
-void DrawBullet(void);
+
 
 BLOCK* GetBlock(void);
 

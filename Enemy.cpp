@@ -43,17 +43,22 @@ ENEMY enemy[ENEMY_MAX];
 *******************************************************************************/
 // エネミーの初期化
 void InitEnemy(void) {
-	if(GetMode() == GAME_FIELD)
+	if (GetMode() == GAME_FIELD)
 	{
-		enemy[0].x = 8;
-		enemy[0].y = 8;
+		enemy[0].x = 19;
+		enemy[0].y = 9;
 		enemy[0].HP = 100;
 	}
 	if (GetMode() == GAME_SCROLL)
 	{
 		enemy[0].x = 11;
 		enemy[0].y = 6;
-		enemy[0].HP = 100;
+
+		enemy[1].x = 50;
+		enemy[1].y = 3;
+
+		enemy[2].x = 38;
+		enemy[2].y = 8;
 	}
 }
 // エネミーの終了処理
@@ -70,8 +75,13 @@ void UpdateEnemy(void) {
 	enemy[0].ox = enemy[0].x;
 	enemy[0].oy = enemy[0].y;
 
+	enemy[1].ox = enemy[1].x;
+	enemy[1].oy = enemy[1].y;
 
-	int rng = rand() % 3;
+	enemy[2].ox = enemy[2].x;
+	enemy[2].oy = enemy[2].y;
+
+	int rng = rand() % 4;
 	if(GetMode() == GAME_SCROLL)
 	{
 		for (int i = 0; i < ENEMY_MAX; i++) {

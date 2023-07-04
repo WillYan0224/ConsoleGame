@@ -45,12 +45,12 @@ int scrollBG[bg_HEIGHT][bg_WIDTH] =
 	B, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g,	g, K, g, g, g, T, T, T, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, B,
 	B, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g,	g, K, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, M, M, M, M, g, g, g, g, B,
 	B, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g,	g, g, g, g, g, g, g, g, N, N, N, g, g, g, g, g, N, N, N, N, J, N, N, N, N, N, N, N, N, N, N, N, N, J, g, g, g, g, g, g, g, g, g, g, g, g, N, g, g, g, g, M, M, M, M, g, g, g, g, B,
-	B, g, g, g, g, g, g, g, g, g, g, g, g, g, J, N, N, N, J, g,	g, g, N, N, N, g, K, g, B, B, B, g, N, N, N, g, B, B, B, B, g, B, B, B, B, B, B, B, B, B, B, B, B, g, g, g, g, g, g, g, g, g, g, g, N, g, B, g, g, g, g, M, M, M, M, g, g, g, g, B,
-	B, g, g, g, g, g, g, g, g, g, g, g, g, g, g, B, B, B, N, N,	N, g, B, B, B, g, K, g, N, N, N, g, g, g, g, g, g, g, g, g, g, B, B, B, B, B, B, B, B, B, B, B, B, g, g, g, g, g, g, g, g, g, N, g, B, g, B, g, N, N, N, M, M, M, M, g, g, g, g, B,
-	B, g, g, g, g, g, g, g, g, J, N, N, N, J, g, B, B, B, B, B,	B, g, N, N, N, g, K, g, g, g, g, g, B, B, B, g, g, g, g, g, g, B, B, B, B, B, B, B, B, B, B, B, B, g, g, g, g, g, g, g, N, N, B, g, B, g, B, g, B, B, B, B, B, B, B, B, g, g, g, B,
-	B, N, N, N, N, N, N, g, g, g, B, B, B, g, g, g, g, g, B, B, B, N, T, g, g, g, K, g, B, B, B, g, N, N, N, N, N, N, N, N, g, B, B, B, B, B, B, B, B, B, B, B, B, g, N, N, N, N, N, N, B, B, B, g, B, g, B, g, B, B, B, B, B, B, B, B, g, g, g, B,
+	B, g, g, g, g, g, g, g, g, g, g, g, g, g, J, g, g, g, J, g,	g, g, N, N, N, g, K, g, B, B, B, g, N, N, N, g, B, B, B, B, g, B, B, B, B, B, B, B, B, B, B, B, B, g, g, g, g, g, g, g, g, g, g, g, N, g, B, g, g, g, g, M, M, M, M, g, g, g, g, B,
+	B, g, g, g, g, g, g, g, g, g, g, g, g, g, g, N, N, N, N, N,	N, g, B, B, B, g, K, g, g, g, g, g, g, g, g, g, g, g, g, g, g, B, B, B, B, B, B, B, B, B, B, B, B, g, g, g, g, g, g, g, g, g, N, g, B, g, B, g, N, N, N, M, M, M, M, g, g, g, g, B,
+	B, g, g, g, g, g, g, N, g, J, N, N, N, J, g, B, B, B, B, B,	B, g, N, N, N, g, K, g, N, N, N, g, B, B, B, g, g, g, g, g, g, B, B, B, B, B, B, B, B, B, B, B, B, g, g, g, g, g, g, g, N, N, B, g, B, g, B, g, B, B, B, B, B, B, B, B, g, g, g, B,
+	B, N, N, N, N, N, N, B, g, g, B, B, B, g, g, g, g, g, B, B, B, N, T, g, g, g, K, g, B, B, B, g, N, N, N, N, N, N, N, N, g, B, B, B, B, B, B, B, B, B, B, B, B, g, N, N, N, N, N, N, B, B, B, g, B, g, B, g, B, B, B, B, B, B, B, B, g, g, g, B,
 	B, B, B, B, B, B, B, g, g, g, B, B, B, g, g, g, g, g, B, B, B, B, T, T, T, g, K, g, g, g, g, g, B, B, B, B, B, B, B, B, g, g, g, g, g, g, g, g, g, g, g, g, g, g, B, B, B, B, B, B, B, B, B, g, B, g, B, g, B, B, B, B, B, B, B, B, g, g, g, B,
-	B, g, g, g, g, g, g, T, T, T, B, B, B, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, B, T, T, T, T, T, T, T, T, T, T, T, T, T, T, B,
+	B, g, g, g, g, g, T, T, T, T, B, B, B, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, B, T, T, T, T, T, T, T, T, T, T, T, T, T, T, B,
 };
 
 // # / - O 
@@ -81,6 +81,13 @@ void UpdateScrollBG(void) {
 	UpdatePlayer();
 	UpdateEnemy();
 	UpdateBlock();
+
+	PLAYER* player = GetPlayer();
+	ENEMY* enemy = GetEnemy();
+	if((player->x == enemy->x && player->y == enemy->y) || (player->x == (enemy + 1)->x && player->y == (enemy + 1)->y) || (player->x == (enemy + 2)->x && player->y == (enemy + 2)->y)){
+		SetMode(GAME_OVER);
+	}
+
 	// モード切り替え
 
 	// SetMode(GAME_FIELD); // フィールドへ遷移
@@ -111,15 +118,10 @@ void DrawScrollBG(void) {
 					// Bを表示
 					DrawBlock();
 				}
-				else if ((x == enemy->x && y == enemy->y))
+				else if (( (x == enemy->x && y == enemy->y) || (x == (enemy + 1)->x && y == (enemy + 1)->y) || (x == (enemy + 2)->x && y == (enemy + 2)->y)))
 				{
 					// Mを表示
 					DrawEnemy();
-				}
-				else if((x == block->bx && y == block->y))
-				{
-					// :を表示
-					DrawBullet();
 				}
 				else { 
 					// 配列の中身にしたがって表示する
@@ -153,7 +155,7 @@ void DrawScrollBG(void) {
 			}
 			printf("\n     ");
 		}
-		printf("\n\n A: プレイヤー左移動\tD: プレイヤー右移動\n ←: ブロック左移動\t→: ブロック右移動\n r: ブロックの位置までテレポート\n c: 魔法の追尾玉発射\n");
+		printf("\n\n A: プレイヤー左移動\tD: プレイヤー右移動\n ←: ブロック左移動\t→: ブロック右移動\n r: ブロックの位置までテレポート\n");
 
 		switch (player->status)
 		{
@@ -164,7 +166,7 @@ void DrawScrollBG(void) {
 			printf("\n\n よくここにたどり着いたな！もしや、逃げられると思っていたのか！");
 			break;
 		}
-		Sleep(150);
+		Sleep(200);
 }
 
 

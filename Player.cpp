@@ -36,7 +36,7 @@
 * ÉOÉçÅ[ÉoÉãïœêî
 *******************************************************************************/
 PLAYER player[PLAYER_MAX];
-
+PET pet[PLAYER_MAX];
 
 /*******************************************************************************
  ä÷êîñº:	
@@ -62,7 +62,6 @@ void InitPlayer(void) {
 		player[0].x = 1;
 		player[0].y = 1;
 		player[0].HP = 30;
-		player[0].str = 30;
 		break;
 	case GAME_TITLE:
 		player[0].x = 4;
@@ -72,6 +71,7 @@ void InitPlayer(void) {
 		player[0].x = 2;
 		player[0].y = 7;
 		player[0].status = SCROLL_TUTORIAL;
+		break;
 	}
 
 	Sleep(200);
@@ -150,6 +150,9 @@ void UpdatePlayer(void) {
 					SetFieldData(player[0].y, player[0].x, 0);
 				}
 				break;
+			case 5:
+				SetMode(GAME_CLEAR);
+				break;
 			default:
 				printf("$");
 				break;
@@ -179,7 +182,8 @@ void UpdatePlayer(void) {
 				player[0].y = opy ;
 				break;
 			case B: // åöï®ìôí ÇÍÇ»Ç¢
-				player[0].y = 1;
+				player[0].y = opy;
+				player[0].x = opx;
 				break;
 
 			case K:
@@ -288,5 +292,7 @@ PLAYER* GetPlayer(void) {
 	return player;
 }
 
-
+PET* GetPet(void) {
+	return pet;
+}
 
