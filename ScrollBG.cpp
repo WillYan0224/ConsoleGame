@@ -1,8 +1,8 @@
 /*******************************************************************************
 * タイトル:		横スクロールフィールドプログラム
 * プログラム名:	Field.cpp
-* 作成者:		GP11A132 17 鍾政殷
-* 作成日:		2023/06/19
+* 作成者:		GPBBAB32 B7 鍾政殷
+* 作成日:		2023/06/B9
 *******************************************************************************/
 
 
@@ -14,9 +14,9 @@
 #include "Player.h"
 #include "Enemy.h"
 #include "ScrollBG.h"
-#include "Block.h"
 #include "main.h"
 #include "Title.h"
+#include "Block.h"
 
 /*******************************************************************************
 * マクロ定義
@@ -39,20 +39,22 @@
 LIGHT light;
 
 
-// 2Dフィールド　80 * 8
+// 2Dフィールド　80 * B0
 int scrollBG[bg_HEIGHT][bg_WIDTH] =
 { 
-	1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-	1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-	1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-	1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-	1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-	1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-	1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-	1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+	B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B,
+	B, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g,	g, K, g, g, g, T, T, T, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, B,
+	B, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g,	g, K, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, M, M, M, M, g, g, g, g, B,
+	B, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g,	g, g, g, g, g, g, g, g, N, N, N, g, g, g, g, g, N, N, N, N, J, N, N, N, N, N, N, N, N, N, N, N, N, J, g, g, g, g, g, g, g, g, g, g, g, g, N, g, g, g, g, M, M, M, M, g, g, g, g, B,
+	B, g, g, g, g, g, g, g, g, g, g, g, g, g, J, N, N, N, J, g,	g, g, N, N, N, g, K, g, B, B, B, g, N, N, N, g, B, B, B, B, g, B, B, B, B, B, B, B, B, B, B, B, B, g, g, g, g, g, g, g, g, g, g, g, N, g, B, g, g, g, g, M, M, M, M, g, g, g, g, B,
+	B, g, g, g, g, g, g, g, g, g, g, g, g, g, g, B, B, B, N, N,	N, g, B, B, B, g, K, g, N, N, N, g, g, g, g, g, g, g, g, g, g, B, B, B, B, B, B, B, B, B, B, B, B, g, g, g, g, g, g, g, g, g, N, g, B, g, B, g, N, N, N, M, M, M, M, g, g, g, g, B,
+	B, g, g, g, g, g, g, g, g, J, N, N, N, J, g, B, B, B, B, B,	B, g, N, N, N, g, K, g, g, g, g, g, B, B, B, g, g, g, g, g, g, B, B, B, B, B, B, B, B, B, B, B, B, g, g, g, g, g, g, g, N, N, B, g, B, g, B, g, B, B, B, B, B, B, B, B, g, g, g, B,
+	B, N, N, N, N, N, N, g, g, g, B, B, B, g, g, g, g, g, B, B, B, N, T, g, g, g, K, g, B, B, B, g, N, N, N, N, N, N, N, N, g, B, B, B, B, B, B, B, B, B, B, B, B, g, N, N, N, N, N, N, B, B, B, g, B, g, B, g, B, B, B, B, B, B, B, B, g, g, g, B,
+	B, B, B, B, B, B, B, g, g, g, B, B, B, g, g, g, g, g, B, B, B, B, T, T, T, g, K, g, g, g, g, g, B, B, B, B, B, B, B, B, g, g, g, g, g, g, g, g, g, g, g, g, g, g, B, B, B, B, B, B, B, B, B, g, B, g, B, g, B, B, B, B, B, B, B, B, g, g, g, B,
+	B, g, g, g, g, g, g, T, T, T, B, B, B, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, B, g, B, g, B, g, g, g, g, g, g, g, g, g, g, g, g, B,
 };
 
-
+// # / - O 
 
 /*******************************************************************************
  関数名:	
@@ -64,9 +66,10 @@ int scrollBG[bg_HEIGHT][bg_WIDTH] =
 // フィールドの初期化処理
 void InitScrollBG(void) {
 	light.X = 6;
-
 	// プレイヤーの初期化 
 	InitPlayer();
+	// ブロックの初期化
+	InitBlock();
 
 	// エネミーの初期化
 	InitEnemy();
@@ -77,7 +80,8 @@ void UpdateScrollBG(void) {
 
 
 	UpdatePlayer();
-
+	UpdateEnemy();
+	UpdateBlock();
 	// モード切り替え
 
 	// SetMode(GAME_FIELD); // フィールドへ遷移
@@ -88,11 +92,13 @@ void UpdateScrollBG(void) {
 
 // フィールド表示処理
 void DrawScrollBG(void) {
+	
 	PLAYER* player = GetPlayer();
 	ENEMY* enemy = GetEnemy();
+	BLOCK* block = GetBlock();
 		printf("\n     ");
 		for (int y = player->y - bg_uPOV; y < player->y + bg_dPOV; y++) {
-			// 1行表示
+			// B行表示
 			for (int x = player->x - bg_lPOV; x < player->x + bg_rPOV + light.X; x++) {
 				if (y < 0 || y >= bg_HEIGHT || x < 0 || x >= bg_WIDTH) {
 					printf(" ");
@@ -101,32 +107,44 @@ void DrawScrollBG(void) {
 				else if (x == player->x && y == player->y) {
 					// Pを表示
 					DrawPlayer();
-
+				}
+				else if (x == block->x && y == block->y) {
+					// Bを表示
+					DrawBlock();
 				}
 				else if ((x == enemy->x && y == enemy->y))
 				{
+					// Mを表示
 					DrawEnemy();
 				}
-				else {
+				else if((x == block->bx && y == block->y))
+				{
+					// :を表示
+					DrawBullet();
+				}
+				else { 
 					// 配列の中身にしたがって表示する
 					switch (scrollBG[y][x]) {
-					case 0: // 通れる
+					case g: // 重力
 						printf(" ");
 						break;
-					case 1: // 障害物
+					case N: // 何もない
+						printf(" ");
+						break;
+					case T: // トラップ
+						printf("/");
+						break;
+					case B: // 建物
 						printf("#");
 						break;
-					case 2: // ライド
-						printf("T");
+					case K: // 壁
+						printf("!");
 						break;
-					case 3: // キー
-						printf("K");
+					case M: // ゴール
+						printf("O");
 						break;
-					case 4: // ドア
-						printf("D");
-						break;
-					case 5: // ゴール
-						printf("G");
+					case J:
+						printf("J");
 						break;
 					default: // エラー検知
 						printf("$");
@@ -136,8 +154,21 @@ void DrawScrollBG(void) {
 			}
 			printf("\n     ");
 		}
-		Sleep(100);
-	}
+		printf("\n\n　#: 壁	\n　T: ライド\n　K: 鍵\n　D:");
+
+		switch (player[0].status)
+		{
+		case ERROR_NO:
+			break;
+		case ERROR_KEY:
+			printf("\n鍵が掛かっている、どこに鍵があるはず、、、\n");
+			Sleep(1000);
+			player[0].status = ERROR_NO;
+			break;
+
+		}
+		Sleep(150);
+}
 
 
 void UninitScrollBG(void) {

@@ -113,7 +113,7 @@ void DrawField(void) {
 		// 1行表示
 		for (int x = player->x - m_lPOV; x < player->x + m_rPOV + entity.X; x++) {
 			if (y < 0 || y >= m_HEIGHT || x < 0 || x >= m_WIDTH) {
-				printf("X");
+				printf(" ");
 			}
 			// Y行目のX列目がプレイヤーの座標と一致したら
 			else if (x == player->x && y == player->y) {
@@ -168,7 +168,6 @@ void DrawField(void) {
 			break;
 		
 	}
-	
 	Sleep(100);
 }
 

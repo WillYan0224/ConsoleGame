@@ -12,6 +12,8 @@
 *******************************************************************************/
 #include "main.h"
 #include "Player.h"
+
+
 #include "Field.h"
 #include "Title.h"
 #include "ScrollBG.h"
@@ -34,6 +36,7 @@
 * グローバル変数
 *******************************************************************************/
 PLAYER player[PLAYER_MAX];
+
 
 /*******************************************************************************
  関数名:	
@@ -67,10 +70,10 @@ void InitPlayer(void) {
 		break;
 	case GAME_SCROLL:
 		player[0].x = 2;
-		player[0].y = 5;
+		player[0].y = 7;
 	}
 
-	Sleep(1500);
+	Sleep(200);
 	player[0].status = ERROR_NO;
 }
 // プレイヤーの終了処理
@@ -79,8 +82,6 @@ void UninitPlayer(void) {
 }
 // プレイヤーの更新処理
 void UpdatePlayer(void) {
-	
-
 
 	if (_kbhit() == 0) {
 		system("cls");
@@ -111,46 +112,42 @@ void UpdatePlayer(void) {
 		ENTITY* entity = GetEntity();
 		switch (key) {
 		case 'w':
-		case 0x48:
 			player[0].y--;
 			break;
 		case 'a':
-		case 0x4b:
 			player[0].x--;
 			break;
 		case 's':
-		case 0x50:
 			player[0].y++;
 			break;
 		case 'd':
-		case 0x4d:
 			player[0].x++;
 			break;
 		}
-		switch (GetFieldData(player->y, player->x)) {
+		switch (GetFieldData(player[0].y, player[0].x)) {
 			case 0:
 				break;
 			case 1:
-				player->y = opy;
-				player->x = opx;
+				player[0].y = opy;
+				player[0].x = opx;
 				break;
 			case 2:
 				entity->X++;
-				SetFieldData(player->y, player->x, 0);
+				SetFieldData(player[0].y, player[0].x, 0);
 				break;
 			case 3:
 				entity->key++;
-				SetFieldData(player->y, player->x, 0);
+				SetFieldData(player[0].y, player[0].x, 0);
 				break;
 			case 4:
 				if (entity->key <= 0) {
-					player->status = ERROR_KEY;
-					player->y = opy;
-					player->x = opx;
+					player[0].status = ERROR_KEY;
+					player[0].y = opy;
+					player[0].x = opx;
 				}
 				else{
 					entity->key--;
-					SetFieldData(player->y, player->x, 0);
+					SetFieldData(player[0].y, player[0].x, 0);
 				}
 				break;
 			default:
@@ -158,82 +155,58 @@ void UpdatePlayer(void) {
 				break;
 		}
 	}
-	// TITLE処理
+	// 横スクロールフィールド処理
 	if(GetMode() == GAME_SCROLL)
 	{
 		LIGHT* light = GetLight();
+
 		switch (key) {
-		case 'w':
-		case 0x48:
-			player[0].x = opx;
-			player[0].y--;
-			break;
 		case 'a':
-		case 0x4b:
 			player[0].x--;
 			break;
 		case 'd':
-		case 0x4d:
 			player[0].x++;
 			break;
-		case 'c':
-			player[0].y--;
-			break;
 		}
-		switch (GetTitleData(player->y, player->x)) {
-			case 0:
-				player->x = opx;
-				player->y = player->y++;
+
+		switch (GetScrollBGData(player[0].y, player[0].x)) {
+			case g: // 重力
+				player[0].y++;
 				break;
-			case 1:
-				player->y = opy;
-				
+			case N:
 				break;
-			case 2:
+			case F: // 床
+				player[0].y = opy ;
 				break;
-			case 3:
+			case B: // 建物等通れない
+			case K:
+				player[0].x = opx;
 				break;
-			case 4:
-				SetTitleData(player->y, player->x, 0);
+			case T:
+				SetMode(GAME_OVER);
+				system("cls");
 				break;
-			case 5:
-				break;
-			case 7:
-				if(key == 'd')
-				{
-					player->x = opx;
-					player->y += 1;
-				}
-				break;
-			case 8:
-				Sleep(500);
-				SetMode(GAME_SCROLL);
-				InitPlayer();
-				break;
-			default:
-				printf("$");
-				break;
+			case M:
+				SetMode(GAME_FIELD);
+				Init();
+				system("cls");
 		}
 	}
 
-	// 横スクロールフィールド処理
+	// TITLE処理
 	if (GetMode() == GAME_TITLE)
 	{
 		CAMERA* camera = GetCamera();
 		switch (key) {
 		case 'd':
-		case 0x4d:
 			player[0].x++;
-
 			break;
 		}
-		switch (GetTitleData(player->y, player->x)) {
+		switch (GetTitleData(player[0].y, player[0].x)) {
 		case 0:
-
 			break;
 		case 1:
-			player->y = opy;
-
+			player[0].y = opy;
 			break;
 		case 2:
 			break;
@@ -241,15 +214,15 @@ void UpdatePlayer(void) {
 			break;
 		case 4:
 			camera->X++;
-			SetTitleData(player->y, player->x, 0);
+			SetTitleData(player[0].y, player[0].x, 0);
 			break;
 		case 5:
 			break;
 		case 7:
 			if (key == 'd' || key == 0x4d)
 			{
-				player->x = opx;
-				player->y += 1;
+				player[0].x = opx;
+				player[0].y++;
 			}
 			break;
 		case 8:
@@ -300,7 +273,6 @@ void UpdatePlayer(void) {
 			break;
 		}
 	}
-
 }
 // プレイヤーの描画処理
 void DrawPlayer(void) {

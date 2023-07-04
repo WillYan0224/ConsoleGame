@@ -15,7 +15,7 @@
 /*******************************************************************************
 * マクロ定義
 *******************************************************************************/
-#define PLAYER_MAX 1
+#define BLOCK_MAX 1
 
 /*******************************************************************************
 * 構造体定義
@@ -24,9 +24,13 @@
 
 
 struct BLOCK {
-	char name[128];
 	int x;
 	int y;
+
+
+	int bx;
+	int by;
+	int dam;
 
 	unsigned int count;
 };
@@ -39,6 +43,7 @@ void InitBlock(void);
 void UninitBlock(void);
 void UpdateBlock(void);
 void DrawBlock(void);
+void DrawBullet(void);
 
 BLOCK* GetBlock(void);
 

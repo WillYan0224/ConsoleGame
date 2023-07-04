@@ -16,7 +16,6 @@
 #include "Field.h"
 #include "ScrollBG.h"
 #include "Block.h"
-
 /*******************************************************************************
 * マクロ定義
 *******************************************************************************/
@@ -68,6 +67,11 @@ int main(void)
 
 // 初期化処理
 void Init(void) {
+	// 開始メッセージの表示
+	printf("GP11A-132-17 GP11課題\n");
+	printf("CHUNG CHINGYAN\n");
+	// Sleep(2000);
+	system("cls");
 
 	// ランダムの初期化処理
 	srand((unsigned)time(NULL));
@@ -75,14 +79,12 @@ void Init(void) {
 	InitTitle();	//　タイトルの初期化処理
 	InitScrollBG(); //  スクロールフィールドの初期化処理
 	InitField();	//　フィールドの初期化処理
+	InitPlayer();
+	InitBlock();
 
-	// 開始メッセージの表示
-	printf("ゲーム開始！\n");
-	printf("←↑→↓で移動します\n");
+
 	// printf("WASDで移動します\n");
 	// キー入力待ち
-	rewind(stdin);
-	(void)_getch();
 }
 
 // 終了処理
@@ -115,6 +117,10 @@ void Update(void) {
 	case GAME_BATTLE:
 		// バトルの更新処理
 		break;
+	case GAME_OVER:
+		SetMode(GAME_TITLE);
+		Init();
+		break;
 	default:
 		printf("[Error]: Mode out of range: %d\n", mode);
 	}
@@ -136,10 +142,12 @@ void Draw(void) {
 		break;
 		//　バトルの表示処理
 	case GAME_BATTLE:
-
 		break;
 		//　音ゲーの更新処理
-
+	case GAME_OVER:
+		printf("GAMEOVER");
+		Sleep(1000);
+		break;
 	default:
 		printf("[Error]: Mode out of range: %d\n", mode);
 	}

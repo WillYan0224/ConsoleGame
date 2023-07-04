@@ -28,6 +28,7 @@ enum {
 	GAME_SCROLL,
 	GAME_FIELD,
 	GAME_BATTLE,
+	GAME_OVER,
 
 	GAME_MAX,
 };

@@ -11,11 +11,10 @@
 * インクルードファイル
 *******************************************************************************/
 #include "Block.h"
-#include "Player.h"
+#include "block.h"
 #include "ScrollBG.h"
 #include "main.h"
-
-
+#include "Player.h"
 /*******************************************************************************
 * マクロ定義
 *******************************************************************************/
@@ -34,10 +33,7 @@
 /*******************************************************************************
 * グローバル変数
 *******************************************************************************/
-BLOCK block;
-
-
-
+BLOCK block[BLOCK_MAX];
 
 
 /*******************************************************************************
@@ -49,7 +45,12 @@ BLOCK block;
 
 // フィールドの初期化処理
 void InitBlock(void) {
-	InitBlock();
+
+	PLAYER* p = GetPlayer();
+	block[0].x = p->x + 1;
+	block[0].y = p->y - 3;
+	block[0].by = -99;
+	block[0].bx = -99;
 }
 
 // フィールドの終了処理
@@ -58,18 +59,77 @@ void UninitBlock(void) {
 }
 void UpdateBlock(void)
 {
+	PLAYER* p = GetPlayer();
+	
+	if (_kbhit() == 0) {
+		system("cls");
+		return;
+	}
+
+	// 現在の座標を保存しておく
+	int opx = block[0].x;
+	int opy = block[0].y;
+
+	// キー入力を取得する
+	rewind(stdin);
+	int key = _getch();
+	if (key == 0 || key == 0xe0) {
+		key = _getch(); // 戻り値：ASCIIコード
+	}
+	system("cls");
+
+
+	// キーボードから読み込み 0xとは16進数 \0とは8進数
+	// 横スクロールフィールド処理
+	if (GetMode() == GAME_SCROLL)
+	{
+		LIGHT* light = GetLight();
+		block[0].y = p->y - 2;
+		switch (key) {
+			case 0x4b:
+				block[0].x--;
+				break;
+			case 0x4d:
+				block[0].x++;
+				break;
+			case 'r':
+				{
+					int tempx = p->x;
+					int tempy = p->y;
+					p->x = block[0].x;
+					p->y = block[0].y;
+					block[0].x = p->x;
+					block[0].y = p->y;
+					break;
+				}
+		case 'c':
+				block[0].bx = block[0].x + 1; 
+				block[0].by = block[0].y;
+				break;
+		}
+		switch (GetScrollBGData(block[0].y, block[0].x)) {
+		case B: // 建物等通れない
+		case K:
+			block[0].x = opx;
+			break;
+		}
+	}
 	
 }
 
 // フィールド表示処理
 void DrawBlock(void) {
-
-
+	printf("B");
+}
+void DrawBullet(void)
+{
+	printf(":");
 }
 
 // 指定されたXY座標を返す
-BLOCK* GetBlock(void) {
-	return  &block;
+BLOCK* GetBlock(void)
+{
+	return block;
 }
 void SetBlock(int y, int x, int num)
 {

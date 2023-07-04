@@ -43,9 +43,18 @@ ENEMY enemy[ENEMY_MAX];
 *******************************************************************************/
 // エネミーの初期化
 void InitEnemy(void) {
-	enemy[0].x = 8;
-	enemy[0].y = 8;
-	enemy[0].HP = 100;
+	if(GetMode() == GAME_FIELD)
+	{
+		enemy[0].x = 8;
+		enemy[0].y = 8;
+		enemy[0].HP = 100;
+	}
+	if (GetMode() == GAME_SCROLL)
+	{
+		enemy[0].x = 8;
+		enemy[0].y = 5;
+		enemy[0].HP = 3;
+	}
 }
 // エネミーの終了処理
 void UninitEnemy(void) {
@@ -61,45 +70,78 @@ void UpdateEnemy(void) {
 	enemy[0].ox = enemy[0].x;
 	enemy[0].oy = enemy[0].y;
 
-	
 
-	
-	for (int i = 0; i < ENEMY_MAX; i++){
-		int rng = rand() % 20;
-		switch(rng)
-		{
-		case 0:
-			enemy[i].x--;
-			break;
-		case 1:
-			enemy[i].x++;
-			break;
-		case 2:
-			enemy[i].y--;
-			break;
-		case 3:
-			enemy[i].y++;
-			break;
-		default:
-			break;
+	if(GetMode() == GAME_FIELD)
+	{
+		for (int i = 0; i < ENEMY_MAX; i++){
+			int rng = rand() % 20;
+			switch(rng)
+			{
+			case 0:
+				enemy[i].x--;
+				break;
+			case 1:
+				enemy[i].x++;
+				break;
+			case 2:
+				enemy[i].y--;
+				break;
+			case 3:
+				enemy[i].y++;
+				break;
+			default:
+				break;
+			}
+			
 		}
 		
-	}
-	
-	// 移動後の場所をチェックする　エネミー.ver
-	for (int i = 0; i < ENEMY_MAX; i++) {
-		switch (GetFieldData( (enemy + i)->y, (enemy + i)->x)) {
-		case 0:
-			break;
-		case 1:
-			enemy[i].y = enemy[i].oy;
-			enemy[i].x = enemy[i].ox;
-			break;
-		default:
-			printf("$");
-			break;
+		// 移動後の場所をチェックする　エネミー.ver
+		for (int i = 0; i < ENEMY_MAX; i++) {
+			switch (GetFieldData( (enemy + i)->y, (enemy + i)->x)) {
+			case 0:
+				break;
+			case 1:
+				enemy[i].y = enemy[i].oy;
+				enemy[i].x = enemy[i].ox;
+				break;
+			default:
+				printf("$");
+				break;
+			}
 		}
 	}
+
+	if(GetMode() == GAME_SCROLL)
+	{
+		for (int i = 0; i < ENEMY_MAX; i++) {
+			int rng = rand() % 4;
+			switch (rng)
+			{
+			case 0:
+				enemy[i].x--;
+				break;
+			case 1:
+				enemy[i].x++;
+				break;
+			}
+		}
+
+		// 移動後の場所をチェックする　エネミー.ver
+		for (int i = 0; i < ENEMY_MAX; i++) {
+			switch (GetFieldData((enemy + i)->y, (enemy + i)->x)) {
+			case 0:
+				break;
+			case 1:
+				enemy[i].y = enemy[i].oy;
+				enemy[i].x = enemy[i].ox;
+				break;
+			default:
+				printf("$");
+				break;
+			}
+		}
+	}
+	
 }
 // エネミーの描画処理
 void DrawEnemy(void) {
