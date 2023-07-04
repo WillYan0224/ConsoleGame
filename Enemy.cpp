@@ -13,7 +13,7 @@
 #include "main.h"
 #include "Enemy.h"
 #include "Player.h"
-#include "Field.h"
+#include "ScrollBG.h"
 
 /*******************************************************************************
 * マクロ定義
@@ -51,9 +51,9 @@ void InitEnemy(void) {
 	}
 	if (GetMode() == GAME_SCROLL)
 	{
-		enemy[0].x = 8;
-		enemy[0].y = 5;
-		enemy[0].HP = 3;
+		enemy[0].x = 11;
+		enemy[0].y = 6;
+		enemy[0].HP = 100;
 	}
 }
 // エネミーの終了処理
@@ -71,50 +71,10 @@ void UpdateEnemy(void) {
 	enemy[0].oy = enemy[0].y;
 
 
-	if(GetMode() == GAME_FIELD)
-	{
-		for (int i = 0; i < ENEMY_MAX; i++){
-			int rng = rand() % 20;
-			switch(rng)
-			{
-			case 0:
-				enemy[i].x--;
-				break;
-			case 1:
-				enemy[i].x++;
-				break;
-			case 2:
-				enemy[i].y--;
-				break;
-			case 3:
-				enemy[i].y++;
-				break;
-			default:
-				break;
-			}
-			
-		}
-		
-		// 移動後の場所をチェックする　エネミー.ver
-		for (int i = 0; i < ENEMY_MAX; i++) {
-			switch (GetFieldData( (enemy + i)->y, (enemy + i)->x)) {
-			case 0:
-				break;
-			case 1:
-				enemy[i].y = enemy[i].oy;
-				enemy[i].x = enemy[i].ox;
-				break;
-			default:
-				printf("$");
-				break;
-			}
-		}
-	}
-
+	int rng = rand() % 3;
 	if(GetMode() == GAME_SCROLL)
 	{
 		for (int i = 0; i < ENEMY_MAX; i++) {
-			int rng = rand() % 4;
 			switch (rng)
 			{
 			case 0:
@@ -128,11 +88,8 @@ void UpdateEnemy(void) {
 
 		// 移動後の場所をチェックする　エネミー.ver
 		for (int i = 0; i < ENEMY_MAX; i++) {
-			switch (GetFieldData((enemy + i)->y, (enemy + i)->x)) {
-			case 0:
-				break;
-			case 1:
-				enemy[i].y = enemy[i].oy;
+			switch (GetScrollBGData(enemy[i].y, enemy[i].x)) {
+			case J:
 				enemy[i].x = enemy[i].ox;
 				break;
 			default:

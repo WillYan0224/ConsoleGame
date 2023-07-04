@@ -71,10 +71,10 @@ void InitPlayer(void) {
 	case GAME_SCROLL:
 		player[0].x = 2;
 		player[0].y = 7;
+		player[0].status = SCROLL_TUTORIAL;
 	}
 
 	Sleep(200);
-	player[0].status = ERROR_NO;
 }
 // プレイヤーの終了処理
 void UninitPlayer(void) {
@@ -179,6 +179,9 @@ void UpdatePlayer(void) {
 				player[0].y = opy ;
 				break;
 			case B: // 建物等通れない
+				player[0].y = 1;
+				break;
+
 			case K:
 				player[0].x = opx;
 				break;
@@ -187,8 +190,10 @@ void UpdatePlayer(void) {
 				system("cls");
 				break;
 			case M:
+				player[0].status = SCROLL_GOAL;
 				SetMode(GAME_FIELD);
 				Init();
+				Sleep(3000);
 				system("cls");
 		}
 	}
@@ -228,7 +233,7 @@ void UpdatePlayer(void) {
 		case 8:
 			Sleep(500);
 			SetMode(GAME_SCROLL);
-			InitPlayer();
+			Init();
 			break;
 		case 9:
 			SetTitleData(10, 13, iC);

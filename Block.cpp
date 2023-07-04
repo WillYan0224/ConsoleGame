@@ -11,10 +11,11 @@
 * インクルードファイル
 *******************************************************************************/
 #include "Block.h"
-#include "block.h"
 #include "ScrollBG.h"
 #include "main.h"
 #include "Player.h"
+#include "Enemy.h"
+
 /*******************************************************************************
 * マクロ定義
 *******************************************************************************/
@@ -51,6 +52,7 @@ void InitBlock(void) {
 	block[0].y = p->y - 3;
 	block[0].by = -99;
 	block[0].bx = -99;
+	block[0].dam = 1;
 }
 
 // フィールドの終了処理
@@ -78,7 +80,7 @@ void UpdateBlock(void)
 	}
 	system("cls");
 
-
+	
 	// キーボードから読み込み 0xとは16進数 \0とは8進数
 	// 横スクロールフィールド処理
 	if (GetMode() == GAME_SCROLL)
@@ -112,6 +114,11 @@ void UpdateBlock(void)
 		case K:
 			block[0].x = opx;
 			break;
+		}
+		int rng = rand() % 2;
+		for(int i = 0; i < ENEMY_MAX; i++)
+		{
+			
 		}
 	}
 	

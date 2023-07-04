@@ -15,7 +15,6 @@
 #include "Enemy.h"
 #include "ScrollBG.h"
 #include "main.h"
-#include "Title.h"
 #include "Block.h"
 
 /*******************************************************************************
@@ -51,7 +50,7 @@ int scrollBG[bg_HEIGHT][bg_WIDTH] =
 	B, g, g, g, g, g, g, g, g, J, N, N, N, J, g, B, B, B, B, B,	B, g, N, N, N, g, K, g, g, g, g, g, B, B, B, g, g, g, g, g, g, B, B, B, B, B, B, B, B, B, B, B, B, g, g, g, g, g, g, g, N, N, B, g, B, g, B, g, B, B, B, B, B, B, B, B, g, g, g, B,
 	B, N, N, N, N, N, N, g, g, g, B, B, B, g, g, g, g, g, B, B, B, N, T, g, g, g, K, g, B, B, B, g, N, N, N, N, N, N, N, N, g, B, B, B, B, B, B, B, B, B, B, B, B, g, N, N, N, N, N, N, B, B, B, g, B, g, B, g, B, B, B, B, B, B, B, B, g, g, g, B,
 	B, B, B, B, B, B, B, g, g, g, B, B, B, g, g, g, g, g, B, B, B, B, T, T, T, g, K, g, g, g, g, g, B, B, B, B, B, B, B, B, g, g, g, g, g, g, g, g, g, g, g, g, g, g, B, B, B, B, B, B, B, B, B, g, B, g, B, g, B, B, B, B, B, B, B, B, g, g, g, B,
-	B, g, g, g, g, g, g, T, T, T, B, B, B, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, B, g, B, g, B, g, g, g, g, g, g, g, g, g, g, g, g, B,
+	B, g, g, g, g, g, g, T, T, T, B, B, B, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, B, T, T, T, T, T, T, T, T, T, T, T, T, T, T, B,
 };
 
 // # / - O 
@@ -154,18 +153,16 @@ void DrawScrollBG(void) {
 			}
 			printf("\n     ");
 		}
-		printf("\n\n　#: 壁	\n　T: ライド\n　K: 鍵\n　D:");
+		printf("\n\n A: プレイヤー左移動\tD: プレイヤー右移動\n ←: ブロック左移動\t→: ブロック右移動\n r: ブロックの位置までテレポート\n c: 魔法の追尾玉発射\n");
 
-		switch (player[0].status)
+		switch (player->status)
 		{
-		case ERROR_NO:
+		case SCROLL_TUTORIAL:
+			printf("\n\n  ///とMを避けながら終点まで行こう！");
 			break;
-		case ERROR_KEY:
-			printf("\n鍵が掛かっている、どこに鍵があるはず、、、\n");
-			Sleep(1000);
-			player[0].status = ERROR_NO;
+		case SCROLL_GOAL:
+			printf("\n\n よくここにたどり着いたな！もしや、逃げられると思っていたのか！");
 			break;
-
 		}
 		Sleep(150);
 }
