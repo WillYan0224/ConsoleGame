@@ -24,11 +24,11 @@
 * É}ÉNÉçíËã`
 *******************************************************************************/
 enum {
-	GAME_TITLE, 
+	GAME_TITLE,
+	GAME_SCROLL,
 	GAME_FIELD,
 	GAME_BATTLE,
-	GAME_RHYTHM,
-	GAME_BOSSFIGHT,
+
 	GAME_MAX,
 };
 

@@ -30,7 +30,7 @@ enum
 
 enum 
 {
-	PLAYER_FIRSTLETTER = 100,
+	
 };
 
 struct PLAYER {
@@ -42,6 +42,7 @@ struct PLAYER {
 	int str;
 
 	int status;
+	int isNamed;
 };
 
 /*******************************************************************************

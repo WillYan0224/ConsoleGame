@@ -14,6 +14,8 @@
 #include "Player.h"
 #include "Enemy.h"
 #include "Field.h"
+#include "ScrollBG.h"
+#include "Block.h"
 
 /*******************************************************************************
 * マクロ定義
@@ -64,30 +66,15 @@ int main(void)
 	return 0;
 }
 
-// フィールドの表示処理
-void UpdateField(void) {
-
-	// プレイヤー座標の更新処理
-	UpdatePlayer();
-	
-	// エネミー座標の更新処理
-	UpdateEnemy();
-
-	//if ((player[0].x == enemy[0].x && player[0].y == enemy[0].y) || (player[0].x == enemy[1].x && player[0].y == enemy[1].y)) {
-	//	printf("戦闘開始！！\n\n");
-	//}
-}
-
 // 初期化処理
 void Init(void) {
 
 	// ランダムの初期化処理
 	srand((unsigned)time(NULL));
 
-	InitField();	//　フィールドの初期化処理
 	InitTitle();	//　タイトルの初期化処理
-
-
+	InitScrollBG(); //  スクロールフィールドの初期化処理
+	InitField();	//　フィールドの初期化処理
 
 	// 開始メッセージの表示
 	printf("ゲーム開始！\n");
@@ -101,9 +88,10 @@ void Init(void) {
 // 終了処理
 void Uninit(void) {
 
-	UninitField();	//　フィールドの終了処理
-	UninitTitle();	//　タイトルの終了処理
-	
+	UninitTitle();		//　タイトルの終了処理
+	UninitScrollBG();	//  スクロールフィールドの終了処理
+	UninitField();		//　フィールドの終了処理
+
 	// キー入力待ち
 	rewind(stdin);
 	(void)_getch();
@@ -117,14 +105,15 @@ void Update(void) {
 		// タイトルの更新処理
 		UpdateTitle();
 		break;
+	case GAME_SCROLL:
+		UpdateScrollBG();
+		break;
 	case GAME_FIELD:
 		// フィールドの更新処理
 		UpdateField();
 		break;
 	case GAME_BATTLE:
 		// バトルの更新処理
-		break;
-	case GAME_RHYTHM:
 		break;
 	default:
 		printf("[Error]: Mode out of range: %d\n", mode);
@@ -137,6 +126,9 @@ void Draw(void) {
 	case GAME_TITLE:
 		// タイトルの表示処理
 		DrawTitle();
+		break; 
+	case GAME_SCROLL:
+		DrawScrollBG();
 		break;
 	case GAME_FIELD:
 		// フィールドの表示処理
@@ -144,12 +136,9 @@ void Draw(void) {
 		break;
 		//　バトルの表示処理
 	case GAME_BATTLE:
-		// TODO: BATTLE PLAYER VS MONSTER 1:1
+
 		break;
 		//　音ゲーの更新処理
-	case GAME_RHYTHM:
-		
-		break;
 
 	default:
 		printf("[Error]: Mode out of range: %d\n", mode);

@@ -50,7 +50,7 @@
 // フィールドの初期化処理
 void InitBlock(void) {
 	InitBlock();
-	}
+}
 
 // フィールドの終了処理
 void UninitBlock(void) {

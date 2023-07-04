@@ -76,7 +76,7 @@ void InitField(void) {
 	entity.Y = 0; // 縦軸
 
 	entity.key = 0;
-	// プレイヤーの初期化
+	// プレイヤーの初期化 
 	InitPlayer();
 
 	// エネミーの初期化
@@ -100,19 +100,6 @@ void UpdateField(void)
 	{	// 当たり判定
 		PLAYER* player = GetPlayer();
 		
-		if (1)
-		{	// 当たっていたらバトルへＧｏ！
-
-			system("cls");
-			printf("\n\n\n\t\tバトルへＧｏ！\n");
-			Sleep(2000);
-			// キー入力待ち
-			rewind(stdin);
-			(void)_getch();
-			system("cls");
-
-			SetMode(GAME_BATTLE);	// バトルモードへ遷移する
-		}
 
 	}
 }

@@ -14,6 +14,8 @@
 #include "Player.h"
 #include "Field.h"
 #include "Title.h"
+#include "ScrollBG.h"
+
 
 /*******************************************************************************
 * マクロ定義
@@ -44,25 +46,28 @@ PLAYER player[PLAYER_MAX];
 void InitPlayer(void) {
 
 
-	if(player[0].status != PLAYER_NAMED)
+	if(player[0].isNamed != PLAYER_NAMED)
 	{
 		printf("旅人よ、お名前は？←　");
 		(void)scanf("%s", player[0].name);
-		player[0].status = PLAYER_NAMED;
+		player[0].isNamed = PLAYER_NAMED;
 	}
 	
 	switch (GetMode())
 	{
-		case GAME_FIELD:
-			player[0].x = 1;
-			player[0].y = 1;
-			player[0].HP = 30;
-			player[0].str = 30;
-			break;
-		case GAME_TITLE:
-			player[0].x = 4;
-			player[0].y = 3;
-			break;
+	case GAME_FIELD:
+		player[0].x = 1;
+		player[0].y = 1;
+		player[0].HP = 30;
+		player[0].str = 30;
+		break;
+	case GAME_TITLE:
+		player[0].x = 4;
+		player[0].y = 3;
+		break;
+	case GAME_SCROLL:
+		player[0].x = 2;
+		player[0].y = 5;
 	}
 
 	Sleep(1500);
@@ -75,7 +80,7 @@ void UninitPlayer(void) {
 // プレイヤーの更新処理
 void UpdatePlayer(void) {
 	
-	
+
 
 	if (_kbhit() == 0) {
 		system("cls");
@@ -100,7 +105,7 @@ void UpdatePlayer(void) {
 
 	
 
-	// 移動後の場所をチェックする
+	// フィールド処理
 	if(GetMode() == GAME_FIELD)
 	{
 		ENTITY* entity = GetEntity();
@@ -153,15 +158,22 @@ void UpdatePlayer(void) {
 				break;
 		}
 	}
-
-	if(GetMode() == GAME_TITLE)
+	// TITLE処理
+	if(GetMode() == GAME_SCROLL)
 	{
 		CAMERA* camera = GetCamera();
 		switch (key) {
+		case 'w':
+		case 0x48:
+			player[0].y--;
+			break;
+		case 'a':
+		case 0x4b:
+			player[0].x--;
+			break;
 		case 'd':
 		case 0x4d:
 			player[0].x++;
-
 			break;
 		}
 		switch (GetTitleData(player->y, player->x)) {
@@ -190,16 +202,100 @@ void UpdatePlayer(void) {
 				}
 				break;
 			case 8:
-				Sleep(1000);
-				SetMode(GAME_FIELD);
+				Sleep(500);
+				SetMode(GAME_SCROLL);
+				InitPlayer();
 				break;
 			default:
 				printf("$");
 				break;
 		}
 	}
-	// title
 
+	// 横スクロールフィールド処理
+	if (GetMode() == GAME_TITLE)
+	{
+		CAMERA* camera = GetCamera();
+		switch (key) {
+		case 'd':
+		case 0x4d:
+			player[0].x++;
+
+			break;
+		}
+		switch (GetTitleData(player->y, player->x)) {
+		case 0:
+
+			break;
+		case 1:
+			player->y = opy;
+
+			break;
+		case 2:
+			break;
+		case 3:
+			break;
+		case 4:
+			camera->X++;
+			SetTitleData(player->y, player->x, 0);
+			break;
+		case 5:
+			break;
+		case 7:
+			if (key == 'd' || key == 0x4d)
+			{
+				player->x = opx;
+				player->y += 1;
+			}
+			break;
+		case 8:
+			Sleep(500);
+			SetMode(GAME_SCROLL);
+			InitPlayer();
+			break;
+		case 9:
+			SetTitleData(10, 13, iC);
+			SetTitleData(10, 14, iH);
+			SetTitleData(10, 15, iU);
+			SetTitleData(10, 16, iN);
+			SetTitleData(10, 17, iG);
+			SetTitleData(10, 19, iC);
+			SetTitleData(10, 20, iH);
+			SetTitleData(10, 21, iI);
+			SetTitleData(10, 22, iN);
+			SetTitleData(10, 23, iG);
+			SetTitleData(10, 24, iY);
+			SetTitleData(10, 25, iA);
+			SetTitleData(10, 26, iN);
+			break;
+		case 10:
+			SetTitleData(10, 27, 0);
+			SetTitleData(10, 28, 5);
+			SetTitleData(10, 29, 0);
+
+			SetTitleData(10, 30, iH);
+			SetTitleData(10, 31, iA);
+			SetTitleData(10, 32, iL);
+			SetTitleData(10, 34, iT);
+			SetTitleData(10, 35, iO);
+			SetTitleData(10, 36, iK);
+			SetTitleData(10, 37, iY);
+			SetTitleData(10, 38, iO);
+
+			SetTitleData(10, 39, 0);
+			SetTitleData(10, 40, 5);
+			SetTitleData(10, 41, 0);
+
+			SetTitleData(10, 42, i2);
+			SetTitleData(10, 43, i0);
+			SetTitleData(10, 44, i2);
+			SetTitleData(10, 45, i3);
+			break;
+		default:
+			printf("$");
+			break;
+		}
+	}
 
 }
 // プレイヤーの描画処理
